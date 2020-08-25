@@ -1,6 +1,6 @@
 # LLE (Locally linear embedding) and its variants
 
-Locally Linear Embedding is another method for dimensionality reduction. It was proposed by Roweis and Saul in 2000. At that time LLE was a novel techinque. Earlier techniques for non linear dimensionality reduction were based on MDS to preserve euclidean distances or more sophisticated distances such as geodesic distances (ISOMAP). LLE takes a different approach, LLE won't preserve distances, but local geometry of the data.
+Locally Linear Embedding is another method for non-linear dimensionality reduction. It was proposed by Roweis and Saul in 2000. At that time LLE was a novel techinque. Earlier techniques for non linear dimensionality reduction were based on MDS to preserve euclidean distances or more sophisticated distances such as geodesic distances (ISOMAP). LLE takes a different approach, LLE won't preserve distances, but local geometry of the data.
 
 In this project I'll be publisihng some implementations for new variants of LLE.  In addition, I'll reproduce results of the paper on which the algorithm is based. However,  implementations will not be computationally optimal, this repository is primarily for research purposes.
 
@@ -12,13 +12,15 @@ In this project I'll be publisihng some implementations for new variants of LLE.
 
     Example; **LLE - Swiss Roll**
 
-<img src="https://github.com/JAVI897/LLE-and-its-variants/blob/master/images/LLE-Swiss-roll.png" style="zoom: 87%;" />
+<img src="https://github.com/JAVI897/LLE-and-its-variants/blob/master/images/LLE-Swiss-roll.png" style="zoom: 70%;" />
 
 - __ISOLLE__: 
 
-  Example; **ISOLLE - Swiss Roll**
+  - In LLE, each data point is reconstructed from a linear combination of its n nearest neighbors, which are typically found using the Euclidean distance. In ISOLLE the search for the neighbors is performed with respect to the geodesic distance. This leads to a more accurate preservation of the data structure [2]
 
-  <img src="https://github.com/JAVI897/LLE-and-its-variants/blob/master/images/ISOLLE-Swiss-roll.png" style="zoom:90%;" />
+  Example; **ISOLLE - Swiss Roll**
+  
+  <img src="https://github.com/JAVI897/LLE-and-its-variants/blob/master/images/ISOLLE-Swiss-roll.png" style="zoom:70%;" />
 
 ### References
 
