@@ -12,13 +12,13 @@ In this project I'll be publisihng some implementations for new variants of LLE.
 
     Example; **LLE - Swiss Roll**
 
-<img src="https://github.com/JAVI897/LLE-and-its-variants/blob/master/images/LLE-Swiss-roll.png" style="zoom: 100%;" />
+<img src="https://github.com/JAVI897/LLE-and-its-variants/blob/master/images/LLE-Swiss-roll.png" style="zoom: 90%;" />
 
 - __ISOLLE__: 
 
   Example; **ISOLLE - Swiss Roll**
 
-  <img src="https://github.com/JAVI897/LLE-and-its-variants/blob/master/images/ISOLLE-Swiss-roll.png" style="zoom:100%;" />
+  <img src="https://github.com/JAVI897/LLE-and-its-variants/blob/master/images/ISOLLE-Swiss-roll.png" style="zoom:90%;" />
 
 ### References
 
