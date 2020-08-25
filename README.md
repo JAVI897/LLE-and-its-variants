@@ -18,7 +18,7 @@ In this project I'll be publisihng some implementations for new variants of LLE.
 
   Example; **ISOLLE - Swiss Roll**
 
-  <img src="C:\Users\Usuario\Desktop\LLE and ISOLLE\images\ISOLLE-Swiss-roll.png" style="zoom:100%;" />
+  <img src="https://github.com/JAVI897/LLE-and-its-variants/blob/master/images/ISOLLE-Swiss-roll.png" style="zoom:100%;" />
 
 ### References
 
