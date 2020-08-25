@@ -12,7 +12,7 @@ In this project I'll be publisihng some implementations for new variants of LLE.
 
     Example; **LLE - Swiss Roll**
 
-<img src="https://github.com/JAVI897/LLE-and-its-variants/blob/master/images/LLE-Swiss-roll.png" style="zoom: 90%;" />
+<img src="https://github.com/JAVI897/LLE-and-its-variants/blob/master/images/LLE-Swiss-roll.png" style="zoom: 87%;" />
 
 - __ISOLLE__: 
 
