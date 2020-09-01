@@ -74,7 +74,7 @@ class ISOLLE:
         if self.k_n_graph:
             nn_matrix = np.argsort(dist_matrix, axis = 1)[:, 1 : self.k_n_geodesic + 1]
         else:
-            nn_matrix = np.array([ [index for index, d in enumerate(dist_matrix[i,:]) if d < self.eps] for i in range(self.n) ])
+            nn_matrix = np.array([ [index for index, d in enumerate(dist_matrix[i,:]) if d < self.eps and index != i] for i in range(self.n) ])
         self._D = []
         for i in range(self.n):
             d_aux = np.zeros((1, self.n))
