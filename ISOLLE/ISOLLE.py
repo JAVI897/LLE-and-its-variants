@@ -16,7 +16,7 @@ class ISOLLE:
         Parameters
         ----------
         
-        X: dxn matrix
+        X: nxd matrix
         k_n: number of neighbours
         dim: number of coordinates
         reg: regularization constant
