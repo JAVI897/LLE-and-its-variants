@@ -188,6 +188,57 @@ class ISOLLE:
         
         return self.Y
     
+    def OutOfSampleExtension(self, P, k = 3):
+        """
+        Compute embedding for novel points
+        Parameters
+        ----------
+        
+        P: nxd matrix of new data points
+        k: number of neighbours to use
+        """
+        
+        n_obs = P.shape[0]
+        knn = []
+        for obs in range(n_obs):
+            x_obs = P[obs]
+            # get nearest neighbors
+            dist = pairwise_distances(np.vstack([self.X, x_obs]))
+            knn_aux = np.argsort(dist[self.n:,:], axis = 1)[:, 1 : k + 1]
+            knn.append(knn_aux[0])             
+        knn = np.array(knn)
+        # compute weights
+        
+        W = [] # Initialize nxn weight matrix
+        for i in range(n_obs):
+            x_i = P[i]
+            G = [] # Local covariance matrix
+            for j in range(k):
+                x_j = self.X[knn[i][j]]
+                G_aux = []
+                for k_2 in range(k):
+                    x_k = self.X[knn[i][k_2]]
+                    gjk = np.dot((x_i - x_j), (x_i - x_k))
+                    G_aux.append(gjk)
+                G.append(G_aux)
+            G = np.array(G)
+            G = G + self.reg*np.eye(*G.shape) # Regularization for G
+            w = np.linalg.solve(G, np.ones((k))) # Calculate weights for x_i
+            w = w / w.sum() # Normalize weights; sum(w)=1
+            
+            if self.verbose and i % 3 == 0:
+                print('[INFO] Weights calculated for {} observations'.format(i + 1))
+                
+            W.append(w)
+            
+        W = np.array(W)
+        y = []
+        for i in range(n_obs):
+            y_aux =  W[i] @ self.Y[knn[i]]
+            y.append(y_aux)
+        y = np.array(y)
+        return y
+    
     def plot_embedding_2d(self, colors, grid = True, dim_1 = 1, dim_2 = 2, cmap = None, size = (15, 10)):
         if self.dim < 2 and dim_2 <= self.dim and dim_1 <= self.dim:
             warnings.warn("There's not enough coordinates")
