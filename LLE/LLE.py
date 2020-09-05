@@ -90,6 +90,17 @@ class LLE:
         
         return self.Y
     
+    def OutOfSampleExtension(self, P, k = 3):
+        """
+        Compute embedding for novel points
+        Parameters
+        ----------
+        
+        P:
+        k: 
+        """
+        return
+    
     def plot_neighbors_graph_2d(self, grid = False, size = (15, 10), fig = False):
         if self.X.shape[1] != 2:
             warnings.warn("Data is not 2-dimensional")

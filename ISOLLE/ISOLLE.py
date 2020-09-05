@@ -9,7 +9,8 @@ import scipy as sp
 import sklearn as skl
 
 class ISOLLE:
-    def __init__(self, X, k_n, dim, reg = 1e-03, verbose = False, k_n_graph = False, eps = None, k_n_geodesic = 3, sparsity = False):
+    def __init__(self, X, k_n, dim, reg = 1e-03, verbose = False, k_n_graph = False, 
+                 eps = None, k_n_geodesic = 3, sparsity = False, opt_eps_jumps = 1.5):
         """
         LLE object
         Parameters
@@ -34,6 +35,8 @@ class ISOLLE:
         k_n_geodesic: k neighbours for computing the k-graph.
         This parameter will be used just if k_n_graph is set
         to True
+        
+        opt_eps_jumps: increasing factor for epsilon
         """
         self.X = X
         self.k_n = k_n
@@ -45,6 +48,7 @@ class ISOLLE:
         self.eps = eps
         self.k_n_graph = k_n_graph
         self.k_n_geodesic = k_n_geodesic
+        self.opt_eps_jumps = opt_eps_jumps
     
     def __optimum_epsilon(self):
         """
@@ -61,7 +65,7 @@ class ISOLLE:
         self.eps = min(dist_matrix[0,1:])
         con = False
         while not con:
-            self.eps = 0.05 + self.eps
+            self.eps = self.opt_eps_jumps * self.eps
             self.__construct_nearest_graph()
             G=nx.from_numpy_matrix(self._G)
             con = nx.is_connected(G)
@@ -74,7 +78,7 @@ class ISOLLE:
         if self.k_n_graph:
             nn_matrix = np.argsort(dist_matrix, axis = 1)[:, 1 : self.k_n_geodesic + 1]
         else:
-            nn_matrix = np.array([ [index for index, d in enumerate(dist_matrix[i,:]) if d < self.eps] for i in range(self.n) ])
+            nn_matrix = np.array([ [index for index, d in enumerate(dist_matrix[i,:]) if d < self.eps and index != i] for i in range(self.n) ])
         self._D = []
         for i in range(self.n):
             d_aux = np.zeros((1, self.n))
