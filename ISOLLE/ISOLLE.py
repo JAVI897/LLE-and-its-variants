@@ -260,6 +260,23 @@ class ISOLLE:
         
         return np.round((sum1 + sum2)/(2*self.n), 3)
     
+    def PVC(self):
+        '''
+        Promedio de Vecinos Preservados – PVC
+        Valencia-Aguirre et al. Comparación de Métodos de Reducción de Dimensión Basados en Análisis por Localidades
+        Tecno Lógicas. 10.22430/22565337.127.
+        '''
+        # Nearest neighbours in X
+        dist_matrix_X = pairwise_distances(self.X, metric = 'seuclidean')
+        knn_matrix_X = np.argsort(dist_matrix_X, axis = 1)[:, 1 : self.k_n + 1]
+        # Nearest neighbours in Y
+        dist_matrix_Y = pairwise_distances(self.Y, metric = 'seuclidean')
+        knn_matrix_Y = np.argsort(dist_matrix_Y, axis = 1)[:, 1 : self.k_n + 1]
+        # Neighbours in Y that are neigbhours in X
+        intersec_Y_X = [len([e for e in knn_matrix_Y[i] if e in knn_matrix_X[i]]) for i in range(self.n)]
+        
+        return sum( intersec_Y_X[i]/self.k_n for i in range(self.n)) / self.n
+    
     def plot_embedding_2d(self, colors, grid = True, dim_1 = 1, dim_2 = 2, cmap = None, size = (15, 10)):
         if self.dim < 2 and dim_2 <= self.dim and dim_1 <= self.dim:
             warnings.warn("There's not enough coordinates")

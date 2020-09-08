@@ -144,6 +144,7 @@ class LLE:
     ### Metrics
     def PNE(self):
         '''
+        Error de Conservación de Vecindarios - ECV
         Valencia-Aguirre et al. Global and local choice of the number of nearest neighbors in locally linear embedding
         Pattern Recognition Letters, Volume 32, Issue 16, (2011), Pages 2171-2177
         https://www.sciencedirect.com/science/article/pii/S0167865511001553
@@ -161,6 +162,23 @@ class LLE:
         sum2 = sum( sum((dist_matrix_X[i,j] - dist_matrix_Y[i,j])**2 for j in alpha[i])/len(alpha[i]) for i in range(self.n) if len(alpha[i]) > 0)
         
         return np.round((sum1 + sum2)/(2*self.n), 3)
+    
+    def PVC(self):
+        '''
+        Promedio de Vecinos Preservados – PVC
+        Valencia-Aguirre et al. Comparación de Métodos de Reducción de Dimensión Basados en Análisis por Localidades
+        Tecno Lógicas. 10.22430/22565337.127.
+        '''
+        # Nearest neighbours in X
+        dist_matrix_X = pairwise_distances(self.X, metric = 'seuclidean')
+        knn_matrix_X = np.argsort(dist_matrix_X, axis = 1)[:, 1 : self.k_n + 1]
+        # Nearest neighbours in Y
+        dist_matrix_Y = pairwise_distances(self.Y, metric = 'seuclidean')
+        knn_matrix_Y = np.argsort(dist_matrix_Y, axis = 1)[:, 1 : self.k_n + 1]
+        # Neighbours in Y that are neigbhours in X
+        intersec_Y_X = [len([e for e in knn_matrix_Y[i] if e in knn_matrix_X[i]]) for i in range(self.n)]
+        
+        return sum( intersec_Y_X[i]/self.k_n for i in range(self.n)) / self.n
     
     def plot_neighbors_graph_2d(self, grid = False, size = (15, 10), fig = False):
         if self.X.shape[1] != 2:
