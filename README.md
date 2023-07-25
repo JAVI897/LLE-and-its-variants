@@ -1,6 +1,6 @@
 # LLE (Locally linear embedding) and its variants
 
-Locally Linear Embedding is another method for non-linear dimensionality reduction. It was proposed by Roweis and Saul in 2000. At that time LLE was a novel techinque. Earlier techniques for non linear dimensionality reduction were based on MDS to preserve euclidean distances or more sophisticated distances such as geodesic distances (ISOMAP). LLE takes a different approach, LLE won't preserve distances, but local geometry of the data.
+Locally Linear Embedding is a method for non-linear dimensionality reduction. It was proposed by Roweis and Saul in 2000. At that time LLE was a novel techinque. Earlier techniques for non linear dimensionality reduction were based on MDS to preserve euclidean distances or more sophisticated distances such as geodesic distances (ISOMAP). LLE takes a different approach, LLE won't preserve distances, but local geometry of the data.
 
 In this project I'll be publisihng some implementations for new variants of LLE.  In addition, I'll reproduce results of the paper on which the algorithm is based. However,  implementations will not be computationally optimal, this repository is primarily for research purposes.
 
